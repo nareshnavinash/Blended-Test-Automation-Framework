@@ -1,0 +1,13 @@
+{
+    "name": "Naresh Sekar",
+    "empty_string": "",
+    "space_string": " ",
+    "client_with_contact_details": {
+        "name": "Americas Inc.",
+        "contact": "John Smith (jsmith@americasinc.com)"
+    },
+    "client_without_contact_details": {
+        "name": "United Brands",
+        "contact": "No contact info available"
+    }
+}

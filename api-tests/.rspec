@@ -1,0 +1,6 @@
+--tty 
+--require spec_helper 
+--format documentation 
+--format AllureRspecFormatter 
+--format RspecJunitFormatter --out reports/junit/report_<%= ENV['TEST_ENV_NUMBER'] %>.xml
+spec/*.rb

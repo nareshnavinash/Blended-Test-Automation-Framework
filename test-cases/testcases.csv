@@ -1,0 +1,80 @@
+Scenario. No,Description,Steps,Expected Result,Execution Status,Comments
+UI.1,Validate the alert message in welcome screen,"1. Navigate to the welcome screen
+2. Validate the presence static fields like, page title, help text, text field and a submit button.
+3. Click on the submit button without giving any name.","1. All the static fields should be present in the screen
+2. An alert popup with the message ""Please provide your name"" should be displayed",Pass,
+UI.2,Validate alert message for the name field is filed with 'empty space',"1. Enter a space in the name field in the welcome page
+2. Click on the submit button","1. We should get the alert popup with the message ""Please provide your name""",Fail,String has to be validated after striping the empty spaces
+UI.3,Validate the Customer list screen by giving proper name,"1. Enter a proper string and then click on submit button in the welcome page
+2. Now Validate the Name, Number of employees and size fields are listed","1. The name given in the welcome page should get parsed and displayed in the welcome message along with the today's date as ""Hi <Name>. It is now <weekday_month_day_year> and here is our customer list. Click on each of them to view their contact details.""
+1. All the fields should get dispalyed in the client listing page",Pass,
+UI.4.a,Validate the Size field based on the number of employees in customer list page,1. Navigate to the clients list page,1. If number of employees is less than or equal to 100 size is small,Pass,"Since we have the less than or equal to 100 size (x) as small declared at first, Assuming that case is superceding in (10 < x >= 100) within the condition (10 < x >= 1000) "
+UI.4.b,Validate the Size field based on the number of employees in customer list page,1. Navigate to the clients list page,1. If number of employees is greater than 100 and less than or equal to 1000 size is Medium,Fail,"When the count is exactly 1000, the size is marked as Big"
+UI.4.c,Validate the Size field based on the number of employees in customer list page,1. Navigate to the clients list page,1. If number of employees is greater than 1000 size is Big,Pass,
+UI.5,Validate the Contacts detail screen for a customer with contact info,"1. Navigate to the clients list page
+2. Click on a client for whom the contact info is available (From the server.js file, except for the company 'United Brands' remaining all the company has contact info)","1. Customer details page should be displayed with Name, # of Employees, Size, Contact details",Pass,
+UI.6,Validate the Contacts detail screen for a customer without contact info,"1. Navigate to the clients list page
+2. Click on a client for whom the contact info is not available (From the server.js file, the company 'United Brands' doesn't have contact info)","1. Customer details page should be displayed with Name, # of Employees, Size, along with the message 'No contact info available' ",Fail,UI is broke when we try to navigate to the client details page where the contact info is not available
+UI.7,Validate the back to customer list button in contact details screen,"1. Navigate to any customer details page
+2. Click on the 'Back to the list' button",1. Customer list page should be dispalyed ,Pass,
+API.1,Validate the post request along with the request body,"Endpoint: <url>/
+Request type: POST
+Headers: Content-Type: application/json
+Request Body: { ""name"": <string> }","1. Should get a json response with the name provided in the request body along with the timestamp and the client details as follows,
+
+{
+    ""name"": <Name_provided_in_request_body>,
+    ""timestamp"": ""Wed Dec 09 2020"",
+    ""customers"": [
+        {
+            ""id"": 1,
+            ""name"": ""Americas Inc."",
+            ""employees"": 10,
+            ""contactInfo"": {
+                ""name"": ""John Smith"",
+                ""email"": ""jsmith@americasinc.com""
+            },
+            ""size"": ""Small""
+        },
+    ]
+}",Pass,
+API.2,Validate the post request along without the request body,"Endpoint: <url>/
+Request type: POST","1. Should get a json response without the name field, with the timestamp and the client details as follows,
+
+{
+    ""timestamp"": ""Wed Dec 09 2020"",
+    ""customers"": [
+        {
+            ""id"": 1,
+            ""name"": ""Americas Inc."",
+            ""employees"": 10,
+            ""contactInfo"": {
+                ""name"": ""John Smith"",
+                ""email"": ""jsmith@americasinc.com""
+            },
+            ""size"": ""Small""
+        },
+    ]
+}",Pass,"Since the API response is not broken, and also name validation occurs in the frontend, assuming that this is the right behaviour"
+API.3,Validate the get request for the endpoint,"Endpoint: <url>/
+Request type: GET",1. Should get resource not found 404 error.,Pass,
+API.4,Validate the post request along with the request body with content type other than application/json,"Endpoint: <url>/
+Request type: POST
+Headers: Content-Type: text
+Request Body: { ""name"": <string> }","1. Should get a json response without the name provided in the request body along with the timestamp and the client details as follows,
+
+{
+    ""timestamp"": ""Wed Dec 09 2020"",
+    ""customers"": [
+        {
+            ""id"": 1,
+            ""name"": ""Americas Inc."",
+            ""employees"": 10,
+            ""contactInfo"": {
+                ""name"": ""John Smith"",
+                ""email"": ""jsmith@americasinc.com""
+            },
+            ""size"": ""Small""
+        },
+    ]
+}",Pass,"Assuming that both the client and server communicates with the json structrure if the content type is changed, then the response should not have a field called name."

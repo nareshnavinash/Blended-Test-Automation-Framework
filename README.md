@@ -8,7 +8,7 @@ Frontend UI automation is built using WebdriverIO and can be found under `ui-tes
 
 ## Travis-CI Build Status
 
-Backend API tests are built with Ruby and hence the files are linted using rubocop which is integrated with Travis-CI, current status - [![Build Status](https://travis-ci.com/nareshnavinash/Hopin-QE-Assignment.svg?token=jyaLNqqhNnqCoEp5xAeF&branch=main)](https://travis-ci.com/nareshnavinash/Hopin-QE-Assignment)
+Backend API tests are built with Ruby and hence the files are linted using rubocop which is integrated with Travis-CI, current status - [![Build Status](https://travis-ci.com/nareshnavinash/Hopin.svg?branch=main)](https://travis-ci.com/nareshnavinash/Hopin)
 
 ## Circle-CI Build Status
 Frontend UI tests are built with javascript and hence the files are linted using ESlint which is intergrated with Circle-CI, current status - 
